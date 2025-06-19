@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<databaseChangeLog
+	xmlns="http://www.liquibase.org/xml/ns/dbchangelog"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.liquibase.org/xml/ns/dbchangelog http://www.liquibase.org/xml/ns/dbchangelog/dbchangelog-3.8.xsd">
+	<changeSet id="1-create-products-table" author="admin">
+		<createTable tableName="products">
+			<column name="id" type="BIGINT" autoIncrement="true">
+				<constraints primaryKey="true" nullable="false" />
+			</column>
+			<column name="name" type="VARCHAR(255)">
+				<constraints nullable="false" />
+			</column>
+			<column name="price" type="DOUBLE PRECISION">
+				<constraints nullable="false" />
+			</column>
+			<column name="create_at" type="DATE" />
+		</createTable>
+	</changeSet>
+	<changeSet id="2-add-descripcion-to-products" author="admin">
+		<addColumn tableName="products">
+			<column name="descripcion" type="VARCHAR(100)" />
+		</addColumn>
+	</changeSet>
+	<changeSet id="3-add-estado-to-products" author="admin">
+		<addColumn tableName="products">
+			<column name="estado" type="VARCHAR(15)" />
+		</addColumn>
+	</changeSet>
+	<changeSet id="4-modify-estado-length" author="admin">
+		<modifyDataType tableName="products" columnName="estado" newDataType="VARCHAR(20)" />
+	</changeSet>
+</databaseChangeLog>
