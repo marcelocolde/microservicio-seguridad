@@ -1,0 +1,5 @@
+construir imagen
+	docker build -t eureka-server .
+levantar contenedor
+	docker run -p 8761:8761 --name eureka-server-cont --network microservicios-app eureka-server
+	
