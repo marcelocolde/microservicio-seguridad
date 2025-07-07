@@ -1,0 +1,15 @@
+url necesarias para poder acceder a las url's
+	GET http://127.0.0.1:8090/oauth2/authorization/client-app
+	POST http://127.0.0.1:9100/login
+		Body
+			username ****
+			password ****
+	POST http://127.0.0.1:9100/oauth2/token
+		Authorization
+			Basic Auth
+				gateway-app
+				***
+		Body
+			code *******************
+			grant_type	authorization_code
+			redirect_uri	http://127.0.0.1:8090/authorized	
