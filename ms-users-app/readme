@@ -1,0 +1,10 @@
+* Datos iniciales en BD
+	En application.properties
+		La primera vez que se levanta la app y para cargar datos iniciales a la base de datos la configuracion es la siguiente:
+			spring.jpa.hibernate.ddl-auto=none
+			spring.sql.init.mode=always
+		Luego deshabilitarlo
+			spring.jpa.hibernate.ddl-auto=none
+			# spring.sql.init.mode=always
+		
+		En caso de fallar el run -> correr ./mvnw clean package -DkipTests para compilar y generar de nuevo el jar
