@@ -1,0 +1,15 @@
+<div class="container my-5">
+    <h3> {{ title }} </h3>
+    <button class="btn btn-primary" (click)="setOpen()"> {{ open ? 'Cancelar' : 'Crear Usuario' }} </button>
+    <div class="row">
+        @if (open) {
+            <div class="col">
+                <user-form (newUserEventEmitter)="addUser($event)" [user]="userSelected"></user-form>
+            </div>
+        }
+        <div class="col">
+            <user [users]="users" (removeUserEmitter)="removeUser($event)" (updateUserEmitter)="updateUser($event)">
+            </user>
+        </div>
+    </div>
+</div>
