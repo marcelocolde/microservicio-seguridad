@@ -1,13 +1,14 @@
-import { Component } from '@angular/core';
+import { Component, ViewChild } from '@angular/core';
 import { UserService } from '../services/user.service';
 import { User } from '../models/user';
 import { UserComponent } from './user/user.component';
 import { UserFormComponent } from './user-form/user-form.component';
 import Swal from 'sweetalert2';
+import { UserFormModalComponent } from './user-form-modal/user-form-modal.component';
 
 @Component({
     selector: 'user-app',
-    imports: [UserComponent, UserFormComponent],
+    imports: [UserComponent, UserFormComponent,UserFormModalComponent],
     templateUrl: './user-app.component.html'
 })
 export class UserAppComponent {
@@ -15,7 +16,13 @@ export class UserAppComponent {
     users: User[] = [];
     userSelected: User;
     open: boolean = false;
+    openModal: boolean = false;
 
+    @ViewChild('userFormModal') userFormModal!: UserFormModalComponent;
+
+    openUserFormModal(): void {
+        this.openModal = true;
+    }
 
     constructor(private userService: UserService) {
         this.userSelected = new User();
@@ -37,6 +44,7 @@ export class UserAppComponent {
                 icon: "success"
             });
         } else {
+            user.id = this.generateId();
             this.users = [...this.users, { ...user }];
             Swal.fire({
                 title: "Exito!",
@@ -80,5 +88,9 @@ export class UserAppComponent {
 
     setOpen(): void {
         this.open = !this.open;
+    }
+
+    generateId(): number {
+        return this.users.length > 0 ? Math.max(...this.users.map(user => user.id)) + 1 : 1;
     }
 }

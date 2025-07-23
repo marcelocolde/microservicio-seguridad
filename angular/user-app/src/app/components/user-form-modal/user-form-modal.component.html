@@ -1,0 +1,90 @@
+<div class="modal abrir-modal animacion fadeIn" tabindex="-1" style="display: block;">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">Modal title</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close" (click)="close()"></button>
+            </div>
+            <div class="modal-body">
+                <form (ngSubmit)="onSubmit()" #userForm="ngForm">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" id="name" class="form-control" [(ngModel)]="user.name" name="name" required
+                            pattern="^\S.*" #name="ngModel">
+                        @if (name.invalid && (name.dirty || name.touched)) {
+                        <div class="alert alert-danger">
+                            Nombre es requerido.
+                        </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname">Lastname</label>
+                        <input type="text" id="lastname" class="form-control" [(ngModel)]="user.lastname"
+                            name="lastname" required #lastname="ngModel">
+                        @if (lastname.invalid && (lastname.dirty || lastname.touched)) {
+                        <div class="alert alert-danger">
+                            Apellido es requerido.
+                        </div>
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="username">Username</label>
+                        <input type="text" id="username" class="form-control" [(ngModel)]="user.username"
+                            name="username" required minlength="6" #username="ngModel">
+                        @if (username.invalid && (username.dirty || username.touched)) {
+                        @if (username.errors!['required']) {
+                        <div class="alert alert-danger">
+                            Username es requerido.
+                        </div>
+                        }
+                        @if (username.errors!['minlength']) {
+                        <div class="alert alert-danger">
+                            Username debe tener al menos 6 caracteres.
+                        </div>
+                        }
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" id="email" class="form-control" [(ngModel)]="user.email" name="email"
+                            required #email="ngModel" email>
+                        <!-- pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" -->
+                        @if (email.invalid && (email.dirty || email.touched)) {
+                        @if(email.errors!['required']){
+                        <div class="alert alert-danger">
+                            Email es requerido.
+                        </div>
+                        }
+                        @if (email.errors!['email']) {
+                        <div class="alert alert-danger">
+                            Email no es válido.
+                        </div>
+                        }
+                        }
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" id="password" class="form-control" [(ngModel)]="user.password"
+                            name="password" required #password="ngModel">
+                        @if (password.invalid && (password.dirty || password.touched)) {
+                        <div class="alert alert-danger">
+                            Contraseña es requerida.
+                        </div>
+                        }
+                    </div>
+
+                    <button type="submit" class="btn btn-primary my-3" [disabled]="userForm.invalid">
+                        {{ user.id ? 'Actualizar' : 'Crear' }}
+                    </button>
+                    <button type="button" class="btn btn-secondary m-3" (click)="onClear(userForm)">
+                        Limpiar
+                    </button>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" (click)="close()">Cerrar</button>
+                <button type="button" class="btn btn-primary">Guardar Cambios</button>
+            </div>
+        </div>
+    </div>
+</div>
